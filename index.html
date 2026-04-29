@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>   المكتبة الجامعية</title>
+
+
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+
+
+
+
+
+<header class="header" id="header">
+  <nav class="nav container">
+
+    <a class="nav__logo" onclick="showPage('home')">
+      <span class="nav__logo-text">
+        
+        
+        
+        مكتبة خاص بالطلاب الجامعيين
+
+
+      </span>
+    </a>
+
+                           <ul class="nav__links" id="navLinks">
+
+      <li>
+        
+        <a class="nav__link active" onclick="showPage('home')"   data-page="home">  
+           الرئيسية</a>
+            
+            
+            
+            </li>
+      <li>
+        
+        <a class="nav__link" onclick="showPage('specialites')" data-page="specialites">
+           التخصصات</a></li>
+      <li>
+
+        
+
+        <a class="nav__link" onclick="showPage('search')"      data-page="search">     
+          <i class="fas fa-search"></i> البحث</a></li>
+      <li>
+
+        
+
+        <a class="nav__link" onclick="showPage('upload')"      data-page="upload">     
+          <i class="fas fa-upload"></i> رفع ملف</a></li>
+    </ul>
+
+
+
+    <button class="nav__hamburger" id="hamburger" onclick="toggleMobile()">
+      <span>
+        
+      </span>
+      <span>
+
+      </span>
+      <span>
+
+      </span>
+    </button>
+  </nav>
+</header>
+
+<div id="toastStack"></div>
+
+
+<main>
+<div class="page active" id="page-home">
+
+
+
+
+
+
+  <section class="hero">
+    <div class="hero__bg"></div>
+    <div class="container hero__content">
+      <p class="hero__sub">الامتحانات لجميع التخصصات </p>
+
+      <div class="hero__search">
+        <i class="fas fa-search hero__search-icon"></i>
+        <input id="heroQ" type="text" placeholder="ابحث عن وحدة أو وثيقة" onkeydown="if(event.key==='Enter')heroSearch()">
+        <button class="btn btn--primary" onclick="heroSearch()">بحث</button>
+      </div>
+
+      <div class="hero__stats">
+        <div class="hero__stat">
+          
+          
+          
+          <b id="hs-docs">25+</b>
+          <span>وثيقة</span>
+        
+        
+        </div>
+
+        <div class="hero__stat">
+          
+          
+          
+          <b>18</b>
+          <span>تخصص</span>
+        
+        
+        </div>
+
+        <div class="hero__stat">
+
+
+          <b id="hs-mods">—</b>
+          <span>وحدة</span>
+        
+        </div>
+        <div class="hero__stat">
+          
+          
+          
+          <b id="hs-dl">20k</b><span>تحميل</span></div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+  <section class="section container">
+
+    <div class="section__head">
+      <h2 class="section__title">التخصصات</h2>
+      
+      <a class="section__more" onclick="showPage('specialites')"> 
+        عرض الكل  
+
+
+
+
+        
+        <i class="fas fa-arrow-left"></i></a>
+    </div>
+    <div class="spec-grid" id="homeSpecGrid">
+      <div class="skeleton-grid">
+        <div class="skeleton-card">
+
+        </div><div class="skeleton-card"></div>
+        <div class="skeleton-card">
+
+
+        </div><div class="skeleton-card"></div>
+        <div class="skeleton-card">
+
+        </div><div class="skeleton-card">
+
+
+
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+
+
+
+  <section class="section container">
+
+    <div class="section__head">
+
+      <h2 class="section__title"><i class="fas fa-fire" style="color:#f97316">
+
+      </i> الأكثر تحميلاً</h2>
+
+    </div>
+
+    <div class="docs-grid" id="featuredDocs">
+
+      <div class="loading-box"><div class="spinner"></div></div>
+    </div>
+
+  </section>
+
+</div>
+
+<div class="page" id="page-specialites">
+
+  <div class="container" style="padding-top:2rem;padding-bottom:4rem">
+    <div class="page-header">
+      <h1 class="page-header__title">جميع التخصصات</h1>
+      <p class="page-header__sub">اختر تخصصك للوصول إلى الوحدات والوثائق</p>
+    </div>
+    <div class="spec-grid" id="allSpecGrid">
+      <div class="loading-box" style="grid-column:1/-1"><div class="spinner"></div></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" id="page-modules">
+
+  <div class="container" style="padding-top:1.5rem;padding-bottom:4rem">
+    <nav class="breadcrumb" id="modBreadcrumb">
+
+    </nav>
+    <div class="page-header">
+      <h1 class="page-header__title" id="modTitle">
+
+      </h1>
+      <p class="page-header__sub" id="modSub">
+
+      </p>
+    </div>
+    <div class="level-tabs" id="levelTabs">
+
+    </div>
+    <div class="modules-grid" id="modulesGrid">
+      <div class="loading-box" style="grid-column:1/-1">
+        <div class="spinner">
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="page" id="page-documents">
+  <div class="container" style="padding-top:1.5rem;padding-bottom:4rem">
+    <nav class="breadcrumb" id="docBreadcrumb">
+
+    </nav>
+    <div class="page-header">
+      <h1 class="page-header__title" id="docTitle">
+
+      </h1>
+      <p class="page-header__sub" id="docSub">
+
+
+
+      </p>
+    </div>
+
+    <div class="filter-bar">
+      <div class="filter-bar__types" id="typeFilters">
+
+        <button class="chip active" onclick="filterType('',this)">الكل</button>
+
+        <button class="chip" onclick="filterType('cours',this)">محاضرات</button>
+        
+        <button class="chip" onclick="filterType('td',this)">TD</button>
+
+        <button class="chip" onclick="filterType('tp',this)">TP</button
+          >
+        <button class="chip" onclick="filterType('examen',this)">امتحانات</button>
+
+        <button class="chip" onclick="filterType('correction',this)">تصحيحات</button>
+
+
+
+
+      </div>
+      <select class="select" onchange="sortDocs(this.value)">
+
+
+        <option value="recent">الأحدث</option>
+
+        <option value="popular">الأكثر تحميلاً</option>
+
+        <option value="noted">الأعلى تقييماً</option>
+
+
+      </select>
+
+
+    </div>
+    <div class="docs-grid" id="docsGrid">
+
+      <div class="loading-box" style="grid-column:1/-1">
+
+        <div class="spinner">
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="page" id="page-search">
+
+  <div class="container" style="padding-top:2rem;padding-bottom:4rem">
+    <div class="page-header">
+
+      <h1 class="page-header__title">البحث المتقدم</h1>
+
+                                                 </div>
+
+    <div class="search-panel">
+
+      <div class="search-panel__row">
+        <input class="input" id="searchQ" type="text" placeholder="ابحث عن محاضرة، امتحان، وحدة..." onkeydown="if(event.key==='Enter')doSearch()">
+        <button class="btn btn--primary" onclick="doSearch()"><i class="fas fa-search"></i> بحث</button>
+      </div>
+      
+
+                                                        <div class="search-panel__filters">
+
+        <select class="select" id="searchSpec">
+          
+          
+          
+          <option value="">كل التخصصات</option>
+        
+        </select>
+
+        <select class="select" id="searchType">
+          <option value="">كل الأنواع</option>
+          <option value="cours">محاضرة</option>
+          <option value="td">TD</option>
+          <option value="tp">TP</option>
+          <option value="examen">امتحان</option>
+          <option value="correction">تصحيح</option>
+          <option value="rapport">تقرير</option>
+          <option value="these">أطروحة</option>
+          <option value="resume">ملخص</option>
+        </select>
+
+
+
+
+
+        <select class="select" id="searchLevel">
+          <option value="">كل المستويات</option>
+          <option value="L1">L1</option>
+
+          <option value="L2">L2</option>
+
+
+          <option value="L3">L3</option>
+
+          <option value="M1">M1</option>
+
+          <option value="M2">M2</option>
+
+          <option value="Doctorat">دكتوراه</option>
+
+
+
+
+
+        </select>
+      </div>
+    </div>
+    <p class="search-info" id="searchInfo"></p>
+    <div class="docs-grid" id="searchResults"></div>
+    <div id="searchPager" class="pager"></div>
+  </div>
+</div>
+
+
+<div class="page" id="page-upload">
+
+
+
+  <div class="container" style="padding-top:2rem;padding-bottom:4rem;max-width:700px">
+
+    <div class="page-header">
+
+
+      <h1 class="page-header__title">رفع وثيقة</h1>
+
+      <p class="page-header__sub">شارك محاضرتك مع آلاف الطلاب</p>
+
+
+    </div>
+
+
+
+    <div class="card">
+
+
+
+
+
+      <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+
+
+
+
+        <p class="drop-zone__text" >اسحب  ملف PDF هن انقر للاختيار</p>
+
+
+        <p class="drop-zone__hint">الحد الأقصى   50MB</p>
+
+        <div class="drop-zone__name" id="dropName">
+
+
+
+        </div>
+
+      </div>
+      <input type="file" id="fileInput" accept="application/pdf" style="display:none" onchange="onFileSelect(this)">
+
+      <div class="form-grid">
+
+        <div class="form-group form-group--full">
+
+          <label class="label">عنوان الوثيقة 
+
+
+          </label>
+
+          <input class="input" id="upTitle" placeholder="مثال:  algorithem  S3">
+        </div>
+        <div class="form-group">
+          <label class="label">التخصص
+
+
+          </label>
+
+          <select class="select" id="upSpec" onchange="loadModsForUpload()">
+
+            <option value="">اختر التخصص</option>
+
+          </select>
+        </div>
+
+        <div class="form-group">
+
+
+          <label class="label">الوحدة 
+
+          </label>
+
+          <select class="select" id="upModule">
+            
+            
+            
+            <option value="">اختر التخصص أولاً</option></select>
+        </div>
+        <div class="form-group">
+
+          <label class="label">نوع الوثيقة </label>
+
+          <select class="select" id="upType">
+
+            <option value="cours">محاضرة (Cours)</option>
+            <option value="td">تمارين (TD)</option>
+            <option value="tp">أعمال تطبيقية (TP)</option>
+            <option value="examen">امتحان</option>
+            <option value="correction">تصحيح</option>
+            <option value="rapport">تقرير</option>
+            <option value="these">أطروحة</option>
+            <option value="resume">ملخص</option>
+          </select>
+        </div>
+        <div class="form-group">
+
+          <label class="label">المستوى</label>
+
+          <select class="select" id="upLevel">
+
+            <option value="L1">L1</option><option value="L2">L2</option>
+            <option value="L3">L3</option><option value="M1">M1</option>
+            <option value="M2">M2</option><option value="Doctorat">دكتوراه</option>
+          </select>
+        </div>
+
+
+
+
+
+
+
+        <div class="form-group">
+
+
+          <label class="label">الأستاذ</label>
+          <input class="input" id="upAuthor" placeholder="اسم الأستاذ">
+        </div>
+        <div class="form-group">
+          <label class="label">الجامعة</label>
+          <input class="input" id="upUniv" placeholder="جامعة الجزائر...">
+        </div>
+        <div class="form-group">
+          <label class="label">السنة الجامعية</label>
+          <input class="input" id="upYear" placeholder="2023/2024">
+        </div>
+        <div class="form-group form-group--full">
+          <label class="label">وصف مختصر</label>
+          <textarea class="input" id="upDesc" rows="3" placeholder="وصف موجز للوثيقة..."></textarea>
+        </div>
+        <div class="form-group form-group--full">
+          <button class="btn btn--primary btn--full" id="upBtn" onclick="submitUpload()">
+           رفع الوثيقة
+          </button>
+`        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+    </div>
+    <div>
+      <p class="footer__heading">التخصصات</p>
+      <a class="footer__link" onclick="goToSpec('informatique')">الإعلام الآلي</a>
+      <a class="footer__link" onclick="goToSpec('medecine')">الطب</a>
+      <a class="footer__link" onclick="goToSpec('biologie')">البيولوجيا</a>
+      <a class="footer__link" onclick="goToSpec('genie-civil')">الهندسة المدنية</a>
+    </div>
+    <div>
+      <p class="footer__heading">روابط</p>
+      
+      <a class="footer__link" onclick="showPage('home')">الرئيسية</a>
+      <a class="footer__link" onclick="showPage('upload')">رفع وثيقة</a>
+    </div>
+    <div>
+     
+    </div>
+  </div>
+  <div class="footer__bottom container">
+  </div>
+</footer>
+
+
+
+
+
+<script src="js/app.js"></script>
+</body>
+</html>
